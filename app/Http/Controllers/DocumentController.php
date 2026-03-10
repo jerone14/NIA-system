@@ -39,33 +39,30 @@ public function store(Request $request)
 $rows = $request->rows;
 
 $document = Document::create([
-'title' => 'Generated Document'
+'title' => 'Generated Document',
+'municipality' => $request->municipality
 ]);
 
 foreach($rows as $row){
 
 if(!$row[0]) continue;
 
-// CATEGORY
 $category = Category::firstOrCreate([
 'name'=>$row[0]
 ]);
 
-// ITEM
 $item = Item::firstOrCreate([
 'name'=>$row[1],
 'category_id'=>$category->id
 ]);
 
 DocumentRow::create([
-
 'document_id'=>$document->id,
 'category'=>$row[0],
 'name'=>$row[1],
 'qty'=>$row[2],
 'price'=>$row[3],
 'total'=>$row[4]
-
 ]);
 
 }
@@ -76,3 +73,5 @@ return response()->json([
 
 }
 }
+
+

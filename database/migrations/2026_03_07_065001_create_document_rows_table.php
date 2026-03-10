@@ -15,6 +15,8 @@ Schema::create('document_rows', function (Blueprint $table) {
 
     $table->id();
 
+    $table->string('municipality')->nullable();
+
     $table->foreignId('document_id')->constrained()->cascadeOnDelete();
 
     $table->foreignId('category_id')->constrained();
